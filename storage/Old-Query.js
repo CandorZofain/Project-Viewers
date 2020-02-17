@@ -3,6 +3,10 @@ const documentClient = new AWS.DynamoDB.DocumentClient({ region: 'us-east-2' });
 const jwt = require('jsonwebtoken');
 const color = require('color');
 
+const STRINGS = {
+    serverStarted: 'Server running at %s'
+}
+
 const verifyAndDecode = auth => {
     const bearerPrefix = 'Bearer ';
     if (!auth.startsWith(bearerPrefix)) return { err: 'Invalid authorization header' };
@@ -17,7 +21,7 @@ const verifyAndDecode = auth => {
 
 const getChannelData = async channelID => {
     const params = {
-        TableName: 'Twitch-Ext-HelloWorld',
+        TableName: 'Twitch-Ext-Viewers',
         Key: { channel: channelID }
     };
 
@@ -27,7 +31,7 @@ const getChannelData = async channelID => {
     if (channelData.Item) return channelData.Item;
 
     const newEntry = {
-        TableName: 'Twitch-Ext-HelloWorld',
+        TableName: 'Twitch-Ext-Viewers',
         Item: {
             channel: channelID,
             colour: '#6441A4',
@@ -51,7 +55,6 @@ exports.handler = async event => {
     };
 
     // Verify all requests.
-    console.log("Event: " + JSON.stringify(event));
     const payload = verifyAndDecode(event.headers.Authorization);
 
     // Return error if verification failed.
@@ -61,5 +64,7 @@ exports.handler = async event => {
     const channelData = await getChannelData(payload.channel_id);
     if (!channelData) return response(500, 'Internal Server Error');
 
-    return response(200, color(channelData.colour).hex());
+    var res = response(200, color(channelData.colour).hex());
+    console.log('Repsonse: ' + res);
+    return res;
 };

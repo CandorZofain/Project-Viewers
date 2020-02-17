@@ -1,6 +1,6 @@
-window.addEventListener('message', (event) => {
-  console.log(event);
-});
+// window.addEventListener('message', (event) => {
+//   console.log(event);
+// });
 //debugger;
 //const local = window.frameElement.attributes.getNamedItem('helperUrl');
 //const online = 'https://extension-files.twitch.tv/helper/v1/twitch-ext.min.js';
