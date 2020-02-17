@@ -2,11 +2,12 @@ const AWS = require('aws-sdk');
 const documentClient = new AWS.DynamoDB.DocumentClient({ region: 'us-east-2' });
 const jwt = require('jsonwebtoken');
 const Promise = require('bluebird');
-const broadcast = require('./broadcast');
+const broadcast = require('./broadcast_vote');
 
 const STRINGS = {
     teamData: 'Unable to retrieve team data',
-    tableName: 'Twitch-Ext-Viewers'
+    tableName: 'Twitch-Ext-Viewers',
+    event: 'VOTING'
 }
 
 const TEAM_TO_INT = {
@@ -116,7 +117,10 @@ exports.handler = async (event) => {
     channelData = await setVote(channelData, payload.user_id, JSON.parse(event.body));
 
     return Promise.all([broadcast(channelData)])
-        .then(() => response(200, channelData.teams))
+        .then(() => response(200, {
+            event: STRINGS.event,
+            data: channelData.teams
+        }))
         .catch(err => {
             console.warn(err);
             response(500, 'Internal Server Error');

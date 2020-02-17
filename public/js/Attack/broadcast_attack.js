@@ -1,6 +1,10 @@
 const request = require('request-promise');
 const jwt = require('jsonwebtoken');
 
+const STRINGS = {
+    event: 'ATTACK_RESULTS'
+};
+
 // Create and return a JWT for use by this service.
 const makeServerToken = channelID => {
     const serverTokenDurationSec = 30;
@@ -21,7 +25,9 @@ const makeServerToken = channelID => {
     return jwt.sign(payload, secret, { algorithm: 'HS256' });
 };
 
-const sendTeamBroadcast = channelData => {
+const sendTeamBroadcast = function () {
+    const channelData = arguments[0];
+    const teamsData = arguments[1];
     // Set the HTTP headers required by the Twitch API.
     const bearerPrefix = 'Bearer ';
     const headers = {
@@ -33,7 +39,10 @@ const sendTeamBroadcast = channelData => {
     // Create the POST body for the Twitch API request.
     const body = JSON.stringify({
         content_type: 'application/json',
-        message: JSON.stringify(channelData.teams),
+        message: JSON.stringify({
+            event: STRINGS.event,
+            data: teamsData
+        }),
         targets: ['broadcast'],
     });
 
@@ -50,6 +59,6 @@ const sendTeamBroadcast = channelData => {
     return request(options);
 };
 
-module.exports = channelData => {
-    return sendTeamBroadcast(channelData);
+module.exports = (channelData, teamsData) => {
+    return sendTeamBroadcast(channelData, teamsData);
 };
