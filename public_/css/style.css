@@ -6,11 +6,6 @@ body {
 
 h1 {
     font-size: 1.5em;
-    margin: 2px 0;
-}
-
-p {
-    margin: 8px 0;
 }
 
 .main {
@@ -21,7 +16,7 @@ p {
     height: 30%;
 
     position: absolute;
-    bottom: 50px;
+    bottom: 0;
     left: 0;
 }
 
@@ -50,13 +45,8 @@ p {
 #input {
     position: relative;
     width: auto;
-    left: 10%;
+    left: 30%;
     text-align: left;
-}
-
-#input.input-center {
-    left: auto;
-    text-align: center;
 }
 
 .text-center {
