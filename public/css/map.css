@@ -1,0 +1,70 @@
+* {
+    z-index: 1000;
+}
+
+.border {
+    position: relative;
+    zoom: 0.2;
+    background-color: black;
+    padding: 100px;
+    z-index: 0;
+}
+
+.map {
+    position: relative;
+}
+
+.hexagon {
+    position: absolute;
+    width: 300px;
+    height: 258px;
+
+    overflow: visible;
+}
+
+.hexagon img { 
+    user-select: none; 
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+.hexagon>img {
+    position: absolute;
+    z-index: 1;
+}
+
+.counter {
+    /* Align the content to the center */
+    /* display: inline-block; */
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+    font-size: 60px;
+    pointer-events: none;
+}
+
+.counter img {
+    vertical-align: middle;
+}
+
+/* -----Menu Styles----- */
+.options {
+    /* display: flex;
+    justify-content: center; */
+
+    position: absolute;
+    top: 258px;
+    left: 50%;
+
+    z-index: 5;
+}
+
+.options button {
+    left: 50%;
+    transform: translateX(-50%);
+}

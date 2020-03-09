@@ -17,12 +17,14 @@ p {
     background-color: darkgray;
     border-style: solid;
 
-    width: 20%;
-    height: 30%;
+    width: 230px;
+    height: 240px;
 
     position: absolute;
     bottom: 50px;
     left: 0;
+
+    overflow: hidden;
 }
 
 .center {
@@ -61,4 +63,8 @@ p {
 
 .text-center {
     text-align: center;
+}
+
+button {
+    font-size: 70px;
 }
