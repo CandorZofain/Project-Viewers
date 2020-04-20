@@ -1,3 +1,7 @@
+:root {
+    --shadow-width: 5px;
+}
+
 body {
     font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
     height: 100%;
@@ -6,18 +10,30 @@ body {
 
 h1 {
     font-size: 1.5em;
+    margin: 2px 0;
+}
+
+p {
+    margin: 8px 0;
+}
+
+#game-container {
+    position: absolute;
+    bottom: 50px;
+    left: 0;
 }
 
 .main {
     background-color: darkgray;
-    border-style: solid;
-
-    width: 20%;
-    height: 30%;
-
-    position: absolute;
-    bottom: 50px;
-    left: 0;
+    border: solid rgb(153, 119, 74);
+    border-width: var(--border-width);
+    border-radius: 5px;
+    box-shadow: var(--shadow-width) 0 rgba(24, 27, 39, 0.377);
+    width: 270px;
+    height: 240px;
+    z-index: 10;
+    overflow: hidden;
+    position: relative;
 }
 
 .center {
@@ -45,10 +61,66 @@ h1 {
 #input {
     position: relative;
     width: auto;
-    left: 30%;
+    left: 10%;
     text-align: left;
+}
+
+#input.input-center {
+    left: auto;
+    text-align: center;
 }
 
 .text-center {
     text-align: center;
+}
+
+button {
+    font-size: 70px;
+}
+
+#end-game {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #FFFFFF60;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+}
+
+#winner {
+    text-align: center;
+    position: relative;
+    top: 50%;
+    transform: translate(0, -50%);
+    font-weight: bolder;
+    text-shadow: 0 0 4px white;
+}
+
+.timer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+}
+
+.timer img {
+    height: 25px;
+    margin: 4px;
+}
+
+.timer-bar-container {
+    width: 100%;
+    margin-right: 4px;
+}
+
+.timer-bar {
+    position: relative;
+    top: 25%;
+
+    width: 100%;
+    height: 50%;
+
+    background-color: green;
 }
