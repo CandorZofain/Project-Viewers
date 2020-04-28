@@ -23,6 +23,12 @@ var Player = function () {
         let data = [space.occupants.length, 0, 0, 0, 0, 0];
         space.occupants.forEach(playerId => {
             const player = gameState.players[playerId];
+            if (!player) {
+                global.Error('Player is undefined');
+                global.Log('playerId: ' + playerId);
+                console.log(gameState);
+                return;
+            }
             switch (player.element) {
                 case 'neutral':
                     data[1]++;

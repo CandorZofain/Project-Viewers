@@ -9,13 +9,13 @@ var MapState = function () {
             x: [0, 0],
             y: [0, 0]
         },
-        mult: 4,
+        mult: 1,
         dragging: false,
         previous: 0,
         minPixelsToStopClickEvent: 10
     };
     const hexData = {
-        size: [300, 258, 75],
+        size: [300, 258, 75].map(n => n * 0.225),
         imgNorm: 'img/hexagon.png',
         imgBase: 'img/hex-base.png',
         imgCrystals: 'img/hex-crystals.png',
@@ -41,6 +41,7 @@ var MapState = function () {
     }
 
     let init = function () {
+        $(document).on("dragstart", "img", () => { return false; });
         Object.keys(gameState.spaces).forEach(x => {
             Object.keys(gameState.spaces[x]).forEach(y => {
                 const space = gameState.spaces[x][y];
@@ -63,6 +64,7 @@ var MapState = function () {
                 let img = document.createElement('img');
                 img.dataset.hex = JSON.stringify([x, y]);
                 img.className = 'hex-img';
+                // img.draggable = false;
                 switch (space.type) {
                     case 0:
                         img.src = hexData.imgNorm;
@@ -99,11 +101,11 @@ var MapState = function () {
 
         // Setup variables for dragging
         let main = document.getElementById('main');
-        let zoom = getComputedStyle(MAP_BORDER_ELEMENT).zoom;
-        let padding = parseInt(getComputedStyle(MAP_BORDER_ELEMENT).padding) * 2;
+        // let zoom = getComputedStyle(MAP_BORDER_ELEMENT).zoom;
+        let padding = parseInt(getComputedStyle(MAP_BORDER_ELEMENT).paddingLeft) * 2;
         drag.max = [
-            bWidth + padding - main.clientWidth / zoom,
-            bHeight + padding - main.clientHeight / zoom
+            bWidth + padding - main.clientWidth,
+            bHeight + padding - main.clientHeight
         ];
 
         // Create counters - Are invisible to start
@@ -117,8 +119,6 @@ var MapState = function () {
             hexagon.append(counter);
         });
 
-        console.log('testing');
-
         document.querySelectorAll('.tab').forEach(tab => {
             tab.onclick = function (event) {
                 SwitchTab(event.currentTarget);
@@ -127,14 +127,19 @@ var MapState = function () {
 
         if (!IS_AWS) {
             $(MAP_BORDER_ELEMENT).append(`
-            <button type='button' onclick='map.StartTurn()' style='position: absolute; top: 150px; left: 0'>
+            <button type='button' onclick='map.StartTurn()' 
+                style='position: absolute; top: 7%; left: 0; width: 80px'>
                 Start Turn</button>
-            <button type='button' onclick='map.EndTurn()' style='position: absolute; top: 250px; left: 0'>
+            <button type='button' onclick='map.EndTurn()'
+                style='position: absolute; top: 11.1%; left: 0; width: 80px'>
                 End Turn</button>
-            <button type='button' onclick='console.log(gameState)' style='position: absolute; top: 350px; left: 0'>
+            <button type='button' onclick='console.log(gameState)'
+                style='position: absolute; top: 15.2%; left: 0; width: 80px'>
                 Print Data</button>
             `);
         }
+
+        console.log(drag);
     }; init();
 
     let SwitchTab = function (tab) {

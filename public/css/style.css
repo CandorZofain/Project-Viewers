@@ -75,7 +75,7 @@ p {
 }
 
 button {
-    font-size: 70px;
+    font-size: var(--font-size);
 }
 
 #end-game {
