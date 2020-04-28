@@ -1,0 +1,3 @@
+C:\Users\Michael Ellis\Documents\Twitch Development\Server\obj\Debug\Server.njsprojAssemblyReference.cache
+C:\Users\Michael Ellis\Documents\Twitch Development\Server\obj\Debug\Server.njsproj.CoreCompileInputs.cache
+C:\Users\Michael Ellis\Documents\Twitch Development\Server\bin\Microsoft.NodejsTools.WebRole.dll

@@ -65,3 +65,6 @@ typings/
 
 # IntelliJ IDE files
 .idea
+
+# Build folder
+build/
